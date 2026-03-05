@@ -1,0 +1,90 @@
+<web-app>
+	<display-name>Archetype Created Web Application</display-name>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>Login</servlet-name>
+		<servlet-class>tienda.Login</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/login.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+    	<servlet-name>Logout</servlet-name>
+    	<servlet-class>tienda.Logout</servlet-class>
+	</servlet>
+	<servlet-mapping>
+    	<servlet-name>Logout</servlet-name>
+    	<url-pattern>/logout.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Registro</servlet-name>
+		<servlet-class>tienda.Registro</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Registro</servlet-name>
+		<url-pattern>/registro.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Usuario</servlet-name>
+		<servlet-class>tienda.Usuario</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Usuario</servlet-name>
+		<url-pattern>/usuario.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ProcesarPedido</servlet-name>
+		<servlet-class>tienda.ProcesarPedido</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProcesarPedido</servlet-name>
+		<url-pattern>/ProcesarPedido.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Tramitacion</servlet-name>
+		<servlet-class>tienda.Tramitacion</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Tramitacion</servlet-name>
+		<url-pattern>/Tramitacion.html</url-pattern>
+	</servlet-mapping>
+
+<servlet>
+    <servlet-name>VerPedidos</servlet-name>
+    <servlet-class>tienda.VerPedidos</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>VerPedidos</servlet-name>
+    <url-pattern>/verPedidos.html</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>ActualizarUsuario</servlet-name>
+    <servlet-class>tienda.ActualizarUsuario</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>ActualizarUsuario</servlet-name>
+    <url-pattern>/actualizarUsuario.html</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>CancelarPedido</servlet-name>
+    <servlet-class>tienda.CancelarPedido</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>CancelarPedido</servlet-name>
+    <url-pattern>/CancelarPedido</url-pattern>
+</servlet-mapping>
+
+</web-app>

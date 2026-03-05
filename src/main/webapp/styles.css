@@ -1,0 +1,72 @@
+
+.fixed-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; 
+    background-color: #004d40; 
+}
+
+.navbar {
+    background-color: #004d40;
+    padding: 10px 0;
+}
+
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.nav-item {
+    margin: 0 15px;
+}
+
+.navbar-brand, .nav-link {
+    color: white !important;
+    font-weight: bold;
+   /* background-image: url('everest-nubes.jpg'); /* Cambia la ruta por la correcta */
+   /* background-size: cover; /* Hace que la imagen cubra toda la pantalla */
+   /* background-position: center; /* Centra la imagen */
+   /* background-repeat: no-repeat; /* Evita que se repita */
+   /* background-attachment: fixed; /* Fija la imagen al desplazarse */
+   /* height: 100vh; /* Asegura que cubra toda la pantalla */
+}
+
+.nav-link:hover {
+    color: #80cbc4 !important;
+}
+
+.content {
+    margin-top: 100px; /* Ajusta este valor según la altura total del título y el menú */
+    padding: 20px;
+    padding-bottom: 100px; /* Margen inferior para evitar que el footer tape el contenido */
+    min-height: calc(100vh - 240px); /* Ajusta la altura mínima para que el footer no tape el contenido */
+    flex: 1;
+}
+
+.footer {
+    background-color: #004d40;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+#carouselEvernest {
+    max-width: 800px;     
+    margin: 0 auto;      
+}
+.carousel-item img {
+    max-height: 400px;   
+    object-fit: cover;    
+}
+

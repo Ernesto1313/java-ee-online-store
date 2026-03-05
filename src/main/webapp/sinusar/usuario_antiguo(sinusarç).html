@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Usuario - EVERNEST</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div id="cabecera"></div>
+    </header>
+
+    <div class="container content">
+        <h2 id="titulo">Acceder a tu cuenta</h2>
+
+        <!-- Formulario de login -->
+        <div id="login-form">
+            <h4>Inicia sesión</h4>
+            <form id="login">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Nombre de usuario</label>
+                    <input type="text" class="form-control" id="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+            </form>
+            <hr>
+            <p>Aún no tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
+        </div>
+
+        <!-- Sección de perfil -->
+        <div id="user-profile" style="display: none;">
+            <h4>Mi perfil</h4>
+            <p><strong>Nombre:</strong> <span id="nombre"></span></p>
+            <p><strong>Dirección:</strong> <span id="direccion"></span></p>
+            <p><strong>Teléfono:</strong> <span id="telefono"></span></p>
+            <p><strong>Email:</strong> <span id="email"></span></p>
+
+            <a href="#edit-profile" class="btn btn-warning" data-bs-toggle="collapse">Editar perfil</a>
+
+            <!-- Formulario para editar perfil -->
+            <div id="edit-profile" class="collapse mt-4">
+                <h5>Modificar datos</h5>
+                <form id="update-profile">
+                    <div class="mb-3">
+                        <label for="new-name" class="form-label">Nuevo nombre</label>
+                        <input type="text" class="form-control" id="new-name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="new-address" class="form-label">Nueva dirección</label>
+                        <input type="text" class="form-control" id="new-address">
+                    </div>
+                    <div class="mb-3">
+                        <label for="new-phone" class="form-label">Nuevo teléfono</label>
+                        <input type="tel" class="form-control" id="new-phone">
+                    </div>
+                    <button type="submit" class="btn btn-success">Guardar cambios</button>
+                </form>
+            </div>
+
+            <hr>
+            <a href="cambiar-contraseña.html" class="btn btn-secondary">Cambiar contraseña</a>
+
+            <hr>
+            <h5>Mis pedidos</h5>
+            <ul id="pedidos-list">
+                <!-- Los pedidos se generarán dinámicamente aquí -->
+            </ul>
+
+            <button id="logout" class="btn btn-danger">Cerrar sesión</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div id="pie"></div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const loginForm = document.getElementById("login");
+            const loginDiv = document.getElementById("login-form");
+            const userProfile = document.getElementById("user-profile");
+            const logoutButton = document.getElementById("logout");
+            const updateProfileForm = document.getElementById("update-profile");
+            const pedidosList = document.getElementById("pedidos-list");
+
+            const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+            if (usuario) {
+                mostrarPerfil(usuario);
+            }
+
+            loginForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+
+                if (username === "usuario" && password === "1234") {
+                    const usuarioData = {
+                        nombre: "Juan Pérez",
+                        direccion: "Av. de la Paz, 12, 46001 València",
+                        telefono: "+34 654 321 987",
+                        email: "juan.perez@email.com",
+                        pedidos: [
+                            { id: "001", fecha: "12/02/2025", estado: "Enviado" },
+                            { id: "002", fecha: "15/02/2025", estado: "Pendiente" }
+                        ]
+                    };
+
+                    localStorage.setItem("usuario", JSON.stringify(usuarioData));
+
+                    mostrarPerfil(usuarioData);
+                } else {
+                    alert("Usuario o contraseña incorrectos");
+                }
+            });
+
+            function mostrarPerfil(usuario) {
+                document.getElementById("nombre").textContent = usuario.nombre;
+                document.getElementById("direccion").textContent = usuario.direccion;
+                document.getElementById("telefono").textContent = usuario.telefono;
+                document.getElementById("email").textContent = usuario.email;
+
+                loginDiv.style.display = "none";
+                userProfile.style.display = "block";
+                document.getElementById("titulo").textContent = "Perfil de Usuario";
+
+                mostrarPedidos(usuario.pedidos);
+            }
+
+            function mostrarPedidos(pedidos) {
+                pedidosList.innerHTML = "";
+                pedidos.forEach((pedido, index) => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `Pedido #${pedido.id} - <strong>Fecha:</strong> ${pedido.fecha} - <strong>Estado:</strong> ${pedido.estado}
+                        <button class="btn btn-sm btn-warning ms-2" onclick="modificarPedido(${index})">Modificar</button>
+                        <button class="btn btn-sm btn-danger ms-2" onclick="cancelarPedido(${index})">Cancelar</button>`;
+                    pedidosList.appendChild(li);
+                });
+            }
+
+            updateProfileForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+                usuario.nombre = document.getElementById("new-name").value;
+                usuario.direccion = document.getElementById("new-address").value;
+                usuario.telefono = document.getElementById("new-phone").value;
+                localStorage.setItem("usuario", JSON.stringify(usuario));
+                mostrarPerfil(usuario);
+            });
+
+            logoutButton.addEventListener("click", function () {
+                localStorage.removeItem("usuario");
+                location.reload();
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/plantilla.js"></script>
+</body>
+</html>
